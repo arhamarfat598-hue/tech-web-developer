@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tech Web Developer — Arfat Shaikh</title>
+<style>
+  :root{
+    --accent:#4f3bff;
+    --dark:#111;
+    --muted:#666;
+    --card-bg: rgba(255,255,255,0.06);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    color:#fff;
+    background: linear-gradient(120deg,#6bff72 0%, #3a2af0 40%, #e34a6f 100%);
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 36px;border-bottom:1px dashed rgba(255,255,255,0.05);
+    position:sticky;top:0;z-index:50;
+    background: linear-gradient(180deg, rgba(0,0,0,0.05), transparent);
+  }
+  .logo{display:flex;align-items:center;gap:12px;}
+  .logo img{height:44px;width:auto;}
+  .brand{font-size:22px;font-weight:700;letter-spacing:0.4px;}
+  nav a{color:#fff;text-decoration:none;margin-left:18px;font-weight:600;position:relative;}
+  nav a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:2px;background:#fff;transition:.3s;}
+  nav a:hover::after{width:100%;}
+  .container{max-width:1100px;margin:40px auto;padding:0 20px;}
+  .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center;margin-top:40px;}
+  .hero-left h3{margin:0;color:rgba(255,255,255,0.95);font-weight:600}
+  .hero-left h1{font-size:64px;margin:8px 0 6px;line-height:1;font-weight:800}
+  .hero-left p{margin:0 0 18px;color:rgba(255,255,255,0.95);font-size:20px}
+  .cta{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;}
+  .btn{
+    background:#fff;color:var(--dark);padding:12px 18px;border-radius:6px;
+    border:none;cursor:pointer;font-weight:700;position:relative;overflow:hidden;
+    transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,0.14);color:#fff}
+  .btn::after{
+    content:"";position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background:rgba(255,255,255,0.3);border-radius:50%;
+    width:100px;height:100px;opacity:0;transition:transform .5s,opacity .8s;
+  }
+  .btn:active::after{
+    transform:translate(-50%,-50%) scale(2.5);
+    opacity:1;
+    transition:0s;
+  }
+  .hero-right{display:flex;justify-content:center;align-items:center;}
+  .profile-card{width:320px;height:420px;border-radius:16px;background:var(--card-bg);
+    display:flex;align-items:center;justify-content:center;padding:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);}
+  .profile-card img{width:100%;height:100%;object-fit:cover;border-radius:12px;}
+  section{margin:48px 0;padding:24px;}
+  .card{background:var(--card-bg);padding:18px;border-radius:12px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  h2{margin:0 0 12px;font-size:26px}
+  p.lead{color:rgba(255,255,255,0.9)}
+  .portfolio-list img{width:100%;height:220px;object-fit:cover;border-radius:10px;}
+  .price-box{padding:18px;border-radius:10px;text-align:center;}
+  .price{font-size:28px;font-weight:800;margin:8px 0}
+  footer{padding:30px;text-align:center;color:rgba(255,255,255,0.9)}
+  /* MODERN POPUP */
+  .modal-backdrop{
+    position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+    backdrop-filter:blur(6px);
+    background:rgba(0,0,0,0.45);
+    z-index:200;
+    animation:fadeIn .4s ease;
+  }
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .modal{
+    width:92%;max-width:500px;background:rgba(3, 184, 187, 0.95);color:#111;
+    border-radius:16px;padding:26px;box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    transform:scale(0.8);opacity:0;animation:popupShow .4s forwards;
+  }
+  @keyframes popupShow{
+    to{transform:scale(1);opacity:1;}
+  }
+  .modal h3{margin-top:0;text-align:center;}
+  .modal input,.modal textarea{
+    width:100%;padding:10px;border:1px solid #d72b2b;border-radius:8px;margin-bottom:10px;
+    font-size:15px;
+  }
+  .modal-buttons{display:flex;gap:10px;justify-content:flex-end;margin-top:8px;}
+  .close-x{position:absolute;right:18px;top:14px;cursor:pointer;font-weight:800;font-size:20px;color:#555;transition:.3s;}
+  .close-x:hover{color:#000;transform:rotate(90deg);}
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr;text-align:center}
+    .hero-right{order:-1}
+    .grid-3,.grid-2{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="logo.png.png" alt="logo" onerror="this.style.display='none'">
+    <div class="brand">Tech Web Developer</div>
+  </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#service">Service</a>
+    <a href="#experience">Experience</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#price">Price</a>
+    <a href="#terms">Terms</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="hero">
+    <div class="hero-left">
+      <h3>I'm</h3>
+      <h1>Arfat Shaikh</h1>
+      <p class="lead">Web Developer — Modern, Simple & Attractive Websites</p>
+      <div class="cta">
+        <button class="btn" id="hireBtn">Hire Me</button>
+        <button class="btn ghost" id="showPortfolioBtn">Click to see portfolio</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="profile-card card">
+        <img src="arfat.png.png" alt="Arfat Shaikh" id="profileImage">
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section id="about" class="card">
+    <h2>About</h2>
+    <p class="lead">मैं <strong>Arfat Shaikh</strong>, एक professional Web Developer हूँ। Modern और responsive websites बनाना मेरा passion है जो आपके business को grow करें।</p>
+  </section>
+
+  <!-- Service -->
+  <section id="service" class="card">
+    <h2>Services</h2>
+    <div class="grid-3">
+      <div class="card"><h3>Single Page</h3><p>Fast & SEO-friendly single page sites.</p></div>
+      <div class="card"><h3>Multi Page</h3><p>Dynamic multi-page websites.</p></div>
+      <div class="card"><h3>Support</h3><p>Maintenance & quick updates.</p></div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="card">
+    <h2>Experience</h2>
+    <p>4 years of web development with real project proof.</p>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="card">
+    <h2>Portfolio</h2>
+    <div id="portfolioGrid" class="grid-2 portfolio-list" style="display:none;">
+      <div><img src="demo1.png.png" alt="Demo 1"><h4>Demo 1</h4></div>
+      <div><img src="demo2.png.png" alt="Demo 2"><h4>Demo 2</h4></div>
+    </div>
+  </section>
+
+  <!-- Price -->
+  <section id="price" class="card">
+    <h2>Price</h2>
+    <div class="grid-2">
+      <div class="price-box card">
+        <h3>Single Page Website</h3>
+        <div class="price">₹ 2,000</div>
+        <button class="btn" onclick="contactWithPrice('Single Page Website','2000')">Book</button>
+      </div>
+      <div class="price-box card">
+        <h3>Multi Page Website</h3>
+        <div class="price">₹ 4,000</div>
+        <button class="btn" onclick="contactWithPrice('Multi Page Website','4000')">Book</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="terms" class="card">
+    <h2>Terms</h2>
+    <p>काम शुरू करने से पहले 50% एडवांस, और प्रोजेक्ट पूरा होने पर बाकी पेमेंट।</p>
+  </section>
+
+  <section id="blog" class="card">
+    <h2>Blog</h2>
+    <p>Web design, UI/UX और project tips जल्द साझा किए जाएँगे।</p>
+  </section>
+
+  <section id="contact" class="card">
+    <h2>Contact</h2>
+    <p><strong>WhatsApp:</strong> <a href="https://wa.me/917028425498" style="color:#fff;">+91 7028425498</a></p>
+    <p><strong>Email:</strong> <a href="mailto:arhamarfat598@gmail.com" style="color:#fff;">arhamarfat598@gmail.com</a></p>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> Tech Web Developer — Arfat Shaikh</footer>
+
+<!-- MODERN POPUP -->
+<div id="modal" class="modal-backdrop">
+  <div class="modal">
+    <div class="close-x" id="closeModal">✕</div>
+    <h3>Hire Me</h3>
+    <input id="clientName" placeholder="आपका नाम">
+    <input id="clientEmail" placeholder="Email (optional)">
+    <textarea id="clientDetails" rows="4" placeholder="Project विवरण"></textarea>
+    <input id="clientBudget" placeholder="Budget (₹)">
+    <div class="modal-buttons">
+      <button class="btn ghost" id="cancelBtn">Cancel</button>
+      <button class="btn" id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+const modal=document.getElementById('modal');
+const hireBtn=document.getElementById('hireBtn');
+const closeModal=document.getElementById('closeModal');
+const cancelBtn=document.getElementById('cancelBtn');
+const submitBtn=document.getElementById('submitBtn');
+
+hireBtn.onclick=()=>{modal.style.display='flex';}
+closeModal.onclick=()=>modal.style.display='none';
+cancelBtn.onclick=()=>modal.style.display='none';
+window.onclick=e=>{if(e.target===modal)modal.style.display='none';}
+
+submitBtn.onclick=()=>{
+  const name=encodeURIComponent(document.getElementById('clientName').value||'');
+  const email=encodeURIComponent(document.getElementById('clientEmail').value||'');
+  const details=encodeURIComponent(document.getElementById('clientDetails').value||'');
+  const budget=encodeURIComponent(document.getElementById('clientBudget').value||'');
+  const msg=`Hello Arfat Shaikh! I want to hire you.%0AName: ${name}%0AEmail: ${email}%0ADetails: ${details}%0ABudget: ${budget}`;
+  window.open(`https://wa.me/917028425498?text=${msg}`,'_blank');
+  modal.style.display='none';
+}
+
+document.getElementById('showPortfolioBtn').onclick=()=>{
+  const grid=document.getElementById('portfolioGrid');
+  grid.style.display=grid.style.display==='grid'?'none':'grid';
+  if(grid.style.display==='grid')document.getElementById('portfolio').scrollIntoView({behavior:'smooth'});
+}
+
+function contactWithPrice(type,price){
+  const msg=`Hello Arfat Shaikh! I want to book ${type} (₹${price}).`;
+  window.open(`https://wa.me/917028425498?text=${encodeURIComponent(msg)}`,'_blank');
+}
+</script>
+</body>
+</html>
